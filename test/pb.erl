@@ -8,7 +8,7 @@
 
 n(G) -> union([undefined, G]).
 bstring() -> binary().
-nstring() -> n(bstring()).
+nstring() -> n(string()).
 nfloat() -> n(?LET(Int, integer(), float(Int))).
 nbool() -> n(boolean()).
 zeta_state() ->
