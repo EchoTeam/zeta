@@ -7,7 +7,6 @@
 -include("include/zeta.hrl").
 
 n(G) -> union([undefined, G]).
-bstring() -> binary().
 nstring() -> n(string()).
 nfloat() -> n(?LET(Int, integer(), float(Int))).
 nbool() -> n(boolean()).
@@ -18,7 +17,7 @@ zeta_state() ->
 		host = nstring(), 
 		description = nstring(), 
 		once = nbool(),
-		tags = list(bstring()),
+		tags = list(string()),
 		ttl = nfloat(),
 		metric_f = nfloat()}.
 
@@ -28,7 +27,7 @@ zeta_event() ->
 		service = nstring(),
 		host = nstring(), 
 		description = nstring(), 
-		tags = list(bstring()),
+		tags = list(string()),
 		ttl = nfloat(),
 		metric_f = nfloat()}.
 
