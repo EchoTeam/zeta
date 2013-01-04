@@ -158,8 +158,8 @@ decode(Bin, ZState = #zeta_state{tags = Tags}) ->
 		    decode(Rest, ZState#zeta_state{description = Desc});
 		{{?STATE_ONCE, Once}, Rest} ->
 		    case Once of
-			1 -> decode(Rest, ZState#zeta_state{once = true});
-			0 -> decode(Rest, ZState#zeta_state{once = false})
+			true -> decode(Rest, ZState#zeta_state{once = true});
+			false -> decode(Rest, ZState#zeta_state{once = false})
 		    end;
 		{{?STATE_TAG, Tag}, Rest} ->
 		    decode(Rest, ZState#zeta_state{tags = [Tag | Tags]});
