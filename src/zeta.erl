@@ -111,9 +111,8 @@ cv(Loc, Metric, State, Opts) ->
     cv_batch([E]).
 
 cv_batch(Es) ->
-    M = #zeta_msg{zevents = Es},
-    Data = zeta_pb:encode(M),
-    do([error_m || 
+    Data = [zeta_pb:encode(#zeta_msg{zevents = [E]}) || E <- Es],
+    do([error_m ||
            Client <- zeta_corral:client(),
            gen_server:cast(Client, {events, Data})]).
 

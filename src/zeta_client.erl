@@ -76,9 +76,9 @@ handle_call({events, Msg}, _From, St = #st{tcp = TCP}) ->
     end;
 handle_call(_Message, _From, State) -> {reply, ignored, State}.
 
-handle_cast({events, Msg}, St = #st{udp = UDP, host = Host, port = Port}) ->
-    gen_udp:send(UDP, Host, Port, Msg),
-    {noreply, St}.
+handle_cast({events, Messages}, State = #st{udp = UDP, host = Host, port = Port}) ->
+    [gen_udp:send(UDP, Host, Port, M) || M <- Messages],
+    {noreply, State}.
 
 handle_info(_Message, State) -> {ok, State}.
 code_change(_Vsn, State, _Extra) -> {ok, State}.
